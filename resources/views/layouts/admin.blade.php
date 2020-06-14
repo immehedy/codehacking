@@ -34,6 +34,7 @@
           <li><a href="{{route('admin.users.create')}}">Create User</a></li>
           <li><a href="{{route('admin.posts.index')}}">All Posts</a></li>
           <li><a href="{{route('admin.posts.create')}}">Create Post</a></li>
+          <li><a href="{{route('admin.categories.index')}}">Categories</a></li>
 
         </ul>
         <!-- Right Side Of Navbar -->
