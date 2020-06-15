@@ -20,6 +20,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
+  @yield('styles')
 </head>
 <body>
 
@@ -35,6 +36,8 @@
           <li><a href="{{route('admin.posts.index')}}">All Posts</a></li>
           <li><a href="{{route('admin.posts.create')}}">Create Post</a></li>
           <li><a href="{{route('admin.categories.index')}}">Categories</a></li>
+          <li><a href="{{route('admin.media.index')}}">All Media</a></li>
+          <li><a href="{{route('admin.media.create')}}">Media Upload</a></li>
 
         </ul>
         <!-- Right Side Of Navbar -->
@@ -61,6 +64,6 @@
           <div class="container">
             @yield('content')
           </div>
-
+        @yield('scripts')
 </body>
 </html>
