@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentrepliesTable extends Migration
+class CreateCommentsRepliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,13 @@ class CreateCommentrepliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('commentreplies', function (Blueprint $table) {
+        Schema::create('comments_replies', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('comment_id')->unsigned()->index();
           $table->integer('is_active')->default(0);
           $table->string('author');
           $table->string('email');
+          $table->string('photo');
           $table->string('body');
           $table->timestamps();
 
@@ -32,6 +33,6 @@ class CreateCommentrepliesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('commentreplies');
+        Schema::drop('comments_replies');
     }
 }

@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class comment extends Model
+class CommentsReply extends Model
 {
     //
     protected $fillable = [
         'comment_id',
         'is_active',
         'author',
+        'photo',
         'email',
         'body',
     ];

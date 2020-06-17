@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
 <style>
 * {
   box-sizing: border-box;
@@ -52,11 +58,10 @@ body {
 
 .well{
   float: left;
-  width: 50%;
+  width: 100%;
 }
-.show-cmnt{
-  float: left;
-  width: 50%;
+.cmnt-reply{
+  display: none;
 }
 
 /* Clear floats after the columns */
@@ -104,7 +109,8 @@ body {
         <p>Post :</p>
         <p>{{$post->body}}</p>
       </div>
-      <div class="card">
+
+
         @if(Session::has('comment_created'))
           <p class="bg-danger">{{session('comment_created')}}</p>
         @endif
@@ -127,22 +133,100 @@ body {
 
         </div>
 
-<!-- show comment right side of the comment box -->
+        <hr>
 
-@if(count($comments)>0)
+      <!-- show comment right side of the comment box -->
+    <div class="card">
+      <h1>Comments:</h1>
+      @if(count($comments)>0)
 
-  @foreach($comments as $comment)
-          <div class="show-cmnt">
-            <div class="media-body">
-              <h3>
-                <!-- <img height="50" src="{{$comment->photo}}" alt="" class="img-thumbnail"> -->
-              {{$comment->author}} <br> <small>{{$comment->created_at->diffForHumans()}}</small>
-            </h3>
-              <p>{{$comment->body}}</p>
+        @foreach($comments as $comment)
+
+          <div class="container">
+          <div class="row">
+          <div class="col-md-8">
+          <h2 class="page-header"></h2>
+          <section class="comment-list">
+          <!-- First Comment -->
+          <article class="row">
+            <div class="col-md-2 col-sm-2 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="{{$comment->photo}}" />
+                <figcaption class="text-center">{{$comment->author}}</figcaption>
+              </figure>
             </div>
+            <div class="col-md-10 col-sm-10">
+              <div class="panel panel-default arrow left">
+                <div class="panel-body">
+                  <header class="text-left">
+                    <div class="comment-user"><i class="fa fa-user"></i> {{$comment->author}}</div>
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>{{$comment->created_at}}</time>
+                  </header>
+                  <div class="comment-post">
+                    <p>
+                        {{$comment->body}}
+                    </p>
+                  </div>
+                  <p class="text-right"><button class="btn btn-primary" onclick="myFunction()">Reply</button></p>
+                </div>
+              </div>
+            </div>
+          </article>
+          @if(count($comment->replies))
+            @foreach($comment->replies as $reply)
+            @if($reply->is_active == 1)
+          <!-- Second Comment Reply -->
+          <div id="cmnt-reply">
+          <article class="row">
+            <div class="col-md-2 col-sm-2 col-md-offset-1 col-sm-offset-0 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="{{$reply->photo}}" />
+                <figcaption class="text-center">{{$reply->author}}</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-9 col-sm-9">
+              <div class="panel panel-default arrow left">
+                <div class="panel-heading right">Reply</div>
+                <div class="panel-body">
+                  <header class="text-left">
+                    <div class="comment-user"><i class="fa fa-user"></i> {{$reply->author}}</div>
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i>{{$reply->created_at}}</time>
+                  </header>
+                  <div class="comment-post">
+                    {{$reply->body}}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </article>
+          @endif
+          @endforeach
+          @endif
+
+
+
+          {!! Form::open(['method' => 'POST', 'action' => 'CommentRepliesController@createReply']) !!}
+            <input type="hidden" name="comment_id" value="{{$comment->id}}">
+            <div class="form-group">
+            {!! Form::label('body', 'Body')!!}
+            {!!Form::text('body', null, ['class'=>'form-control', 'rows'=>1])!!}
+
+            <div class="form-group">
+              {!! Form::submit('Reply',['class'=>'btn btn-primary'])!!}
+            </div>
+
+          {!! Form::close() !!}
+
+        </div>
+          </section>
           </div>
-    @endforeach
-@endif
+          </div>
+          </div>
+
+          @endforeach
+
+      @endif
       </div>
     </div>
     <div class="rightcolumn">
@@ -171,7 +255,17 @@ body {
   <div class="footer">
     <h2>Footer</h2>
   </div>
+  <script>
+    function myFunction() {
+        var x = document.getElementById("cmnt-reply");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
 
+  </script>
   </body>
 </div>
 
