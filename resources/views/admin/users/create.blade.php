@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.adminnavbar')
 
 @section('content')
 
@@ -41,7 +41,7 @@
     </div> -->
 
       <div class="form-group">
-        {!! Form::submit('create post',['class'=>'btn btn-primary'])!!}
+        {!! Form::submit('create User',['class'=>'btn btn-primary'])!!}
       </div>
 
     {!! Form::close() !!}

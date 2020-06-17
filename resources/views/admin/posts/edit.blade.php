@@ -1,14 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.adminnavbar')
 
 @section('content')
 
-<h1>create Post</h1>
+<h1>Edit Post</h1>
 
 <div class="row">
 
   <div class="col-sm-3">
 
-    <img src="{{$post->photo ? $post->photo->file : "http://placehold.it/400x400"}}" alt="" class="img-responsive img-circle">
+    <img  class="img-thumbnail" src="{{$post->photo ? $post->photo->file : "http://placehold.it/400x400"}}" alt="">
 
   </div>
 
@@ -38,7 +38,7 @@
         </div>
 
       <div class="form-group">
-        {!! Form::submit('create post',['class'=>'btn btn-primary'])!!}
+        {!! Form::submit('Edit post',['class'=>'btn btn-primary'])!!}
       </div>
 
     {!! Form::close() !!}

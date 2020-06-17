@@ -2,7 +2,9 @@
 
 @section('content')
 
-@if(count($comments) >0)
+@if(count($comments)>0)
+
+  <h1>Comments of {{$post->title}}</h1>
 
     <table class="table table-striped">
       <thead>
@@ -63,5 +65,7 @@
 
       </tbody>
     </table>
+  @else
+      <h1>No Comments for this Post</h1>
 @endif
 @stop

@@ -38,6 +38,7 @@
           <li><a href="{{route('admin.categories.index')}}">Categories</a></li>
           <li><a href="{{route('admin.media.index')}}">All Media</a></li>
           <li><a href="{{route('admin.media.create')}}">Media Upload</a></li>
+          <li><a href="{{route('admin.comments.index')}}">Comments</a></li>
 
         </ul>
         <!-- Right Side Of Navbar -->

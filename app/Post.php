@@ -33,7 +33,7 @@ class Post extends Model
 
     public function comments(){
 
-      return $this->hasMany('App\comment');
+      return $this->hasMany('App\Comment');
     }
 
 

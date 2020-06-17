@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,16 +10,17 @@ class comment extends Model
         'post_id',
         'is_active',
         'author',
+        'photo',
         'email',
         'body',
     ];
 
     public function post(){
-      return $this->belongsTo('App\post')
-      
+      return $this->belongsTo('App\post');
+
     }
 
-    public funtion replies(){
-      return $this->hasMany('App\commentreply');
+    public function replies(){
+      return $this->hasMany('App\Commentreply');
     }
 }
